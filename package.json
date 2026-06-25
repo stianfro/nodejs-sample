@@ -1,0 +1,16 @@
+{
+  "name": "node-buildpack-sample",
+  "version": "1.0.0",
+  "description": "A minimal Node.js Express app for buildpack-based deployments.",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
