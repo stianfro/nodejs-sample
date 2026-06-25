@@ -1,6 +1,6 @@
 # Node Buildpack Sample
 
-A minimal Node.js/Express application for testing Cloud Native Buildpacks-compatible deployments.
+A minimal Node.js application for testing Cloud Native Buildpacks-compatible deployments.
 
 ## Endpoints
 

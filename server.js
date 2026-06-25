@@ -1,21 +1,26 @@
-const express = require("express");
+const http = require("node:http");
 
-const app = express();
+function sendJson(response, statusCode, body) {
+  response.writeHead(statusCode, { "content-type": "application/json" });
+  response.end(JSON.stringify(body));
+}
 
-app.get("/", (_request, response) => {
-  response.json({
-    name: "node-buildpack-sample",
-    message: "Hello from a buildpack-compatible Node.js sample app.",
-    endpoints: ["/", "/healthz"]
-  });
-});
+const app = http.createServer((request, response) => {
+  if (request.url === "/" && request.method === "GET") {
+    sendJson(response, 200, {
+      name: "node-buildpack-sample",
+      message: "Hello from a buildpack-compatible Node.js sample app.",
+      endpoints: ["/", "/healthz"]
+    });
+    return;
+  }
 
-app.get("/healthz", (_request, response) => {
-  response.json({ ok: true });
-});
+  if (request.url === "/healthz" && request.method === "GET") {
+    sendJson(response, 200, { ok: true });
+    return;
+  }
 
-app.use((_request, response) => {
-  response.status(404).json({ error: "not_found" });
+  sendJson(response, 404, { error: "not_found" });
 });
 
 if (require.main === module) {
